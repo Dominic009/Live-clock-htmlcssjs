@@ -15,27 +15,35 @@
                 <span id="MIN">00</span>
                 <span>:</span>
                 <span id="SEC">00</span>
+                <span id="AMPM"></span>
             </div>
         </div>
     </div>
 
 
+ 
+
+
     <script>
-        let hrs = document.getElementById("HRS");
-        
+        let hrs = document.getElementById("HRS");      
         let min = document.getElementById("MIN");
         let sec = document.getElementById("SEC");
-
+        let ampm = document.getElementById("AMPM");
+    
         setInterval(() => {
             let currentTime = new Date();
-
-
-            HRS.innerHTML = currentTime.getHours();
-            MIN.innerHTML = currentTime.getMinutes();
-            SEC.innerHTML = currentTime.getSeconds();
+            let hours = currentTime.getHours();
+            let isAM = hours < 12;
+    
+            // Convert to 12-hour format
+            hours = hours % 12 || 12; 
+            // 0 should be displayed as 12 in 12-hour format
+    
+            hrs.innerHTML = (hours < 10 ? "0" : "") + hours;
+            min.innerHTML = (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
+            sec.innerHTML = (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
+            ampm.innerHTML = isAM ? "AM" : "PM";
         }, 1000);
-
- 
     </script>
 
 </body>
